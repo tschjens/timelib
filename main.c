@@ -1,7 +1,7 @@
 /**
 * Tag des Jahres
 * Autor: Jens Tscherbatko
-* erstellt am 29.03.2022
+* erstellt am 17.05.2022
 **/
 
 #include <stdio.h>
@@ -16,7 +16,6 @@ int exists_date(int day, int month, int year);
 
 int main()
 {
-
     int day = 0;
     int month = 0;
     int year = 0;
@@ -37,7 +36,6 @@ int main()
     {
         printf("Fehlerhafte eingabe");
     }
-
 }
 
 int day_of_the_year(int day, int month, int year)
@@ -46,7 +44,6 @@ int day_of_the_year(int day, int month, int year)
     for(int i = 0; i < month - 1; i++)
     {
         passed_days += get_days_for_month(i,year);
-        printf("passed_days %i",get_days_for_month(i,year));
     }
     passed_days += day;
     return passed_days;
@@ -65,7 +62,7 @@ void input_date(int *day, int *month, int *year)
 /*Schaltjahreskontrolle, Jahre vor 1582 sind ungültig*/
 int is_leapyear(int year)
 {
-    int is_leapyear;
+    int is_leapyear = 0;
     if (year < 1582){
         is_leapyear = -1;
     }
@@ -106,7 +103,7 @@ int get_days_for_month(int month, int year)
     }
     if (days != -1)
     {
-        days = tage_pro_monat[month - 1];
+        days = tage_pro_monat[month];
     }
     return days;
 }
@@ -118,7 +115,7 @@ int exists_date(int day, int month, int year)
     {
          if(month < 13 && month > 0)
         {
-            if(day > 0 && day <= get_days_for_month(month,year))
+            if(day > 0 && day <= get_days_for_month(month - 1,year))
             {
                 exists = 1;
             }
