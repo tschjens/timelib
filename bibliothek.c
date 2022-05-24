@@ -1,28 +1,31 @@
-
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "bibliothek.h"
 
 
-
-int day_of_the_year(int day, int month, int year)
+int day_of_the_year(struct date datum)
 {
+
     int passed_days = 0;
-    for(int i = 0; i < month - 1; i++)
+    for(int i = 0; i < datum.month - 1; i++)
     {
-        passed_days += get_days_for_month(i,year);
+        passed_days += get_days_for_month(i,datum.year);
     }
-    passed_days += day;
+    passed_days += datum.day;
     return passed_days;
 }
-
-void input_date(int *day, int *month, int *year)
+/*Eingabe der Werte*/
+struct date input_date()
 {
+    struct date datum;
     printf("Geben Sie das Jahr ein: ");
-    scanf("%i",&year);
+    scanf("%i",&datum.year);
     printf("Geben Sie den Monat ein: ");
-    scanf("%i",&month);
+    scanf("%i",&datum.month);
     printf("Geben Sie den Tag ein: ");
-    scanf("%i",&day);
+    scanf("%i",&datum.day);
+
+    return datum;
 }
 
 /*Schaltjahreskontrolle, Jahre vor 1582 sind ungültig*/
@@ -74,14 +77,14 @@ int get_days_for_month(int month, int year)
     return days;
 }
 
-int exists_date(int day, int month, int year)
+int exists_date(struct date datum)
 {
     int exists = 0;
-    if (year < 2401 && year > 1581)
+    if (datum.year < 2401 && datum.year > 1581)
     {
-         if(month < 13 && month > 0)
+         if(datum.month < 13 && datum.month > 0)
         {
-            if(day > 0 && day <= get_days_for_month(month - 1,year))
+            if(datum.day > 0 && datum.day <= get_days_for_month(datum.month - 1,datum.year))
             {
                 exists = 1;
             }
