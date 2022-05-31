@@ -1,8 +1,10 @@
+/*Funktionen für die Main.c*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "bibliothek.h"
 
-
+/*Berechnung der im Jahr bereits vergangenen Tage*/
 int day_of_the_year(struct date datum)
 {
 
@@ -14,7 +16,7 @@ int day_of_the_year(struct date datum)
     passed_days += datum.day;
     return passed_days;
 }
-/*Eingabe der Werte*/
+/*Eingabe des Datums*/
 struct date input_date()
 {
     struct date datum;
@@ -32,12 +34,16 @@ struct date input_date()
 int is_leapyear(int year)
 {
     int is_leapyear = 0;
-    if (year < 1582){
+    if (year < 1582)
+    {
         is_leapyear = -1;
     }
-    else if (year % 4 == 0){
-        if(year % 100 == 0){
-            if(year % 400 == 0){
+    else if (year % 4 == 0)
+    {
+        if(year % 100 == 0)
+        {
+            if(year % 400 == 0)
+            {
                 is_leapyear = 1;
             }
             else
@@ -57,6 +63,7 @@ int is_leapyear(int year)
 
     return is_leapyear;
 }
+/*Berechnung der Tage im Monat */
 int get_days_for_month(int month, int year)
 {
     int tage_pro_monat[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
@@ -76,13 +83,13 @@ int get_days_for_month(int month, int year)
     }
     return days;
 }
-
+/*Kontrolle ob das eingegebene Datum exisitert*/
 int exists_date(struct date datum)
 {
     int exists = 0;
     if (datum.year < 2401 && datum.year > 1581)
     {
-         if(datum.month < 13 && datum.month > 0)
+        if(datum.month < 13 && datum.month > 0)
         {
             if(datum.day > 0 && datum.day <= get_days_for_month(datum.month - 1,datum.year))
             {

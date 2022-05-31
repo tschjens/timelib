@@ -8,8 +8,6 @@
 #include "bibliothek.h"
 
 
-
-
 int main()
 {
     struct date datum1;

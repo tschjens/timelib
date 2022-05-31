@@ -3,9 +3,9 @@
 
 struct date
 {
-  int day;
-  int month;
-  int year;
+    int day;
+    int month;
+    int year;
 };
 
 int day_of_the_year(struct date datum);
