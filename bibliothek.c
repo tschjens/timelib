@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include "bibliothek.h"
 
-/*Berechnung der im Jahr bereits vergangenen Tage*/
+/*Die Funktion berechnet für ein gegebenes Datum des gregorianischen Kalenders bestehend aus Tag, Monat
+und Jahr die Nummer des Tages, gezählt von Jahresbeginn (1. Januar) an. Schaltjahre werden bei der
+Berechnung berücksichtigt. Ist das übergebene Datum ungültig, beträgt der Rückgabewert -1.*/
 int day_of_the_year(struct date datum)
 {
 
@@ -16,7 +18,7 @@ int day_of_the_year(struct date datum)
     passed_days += datum.day;
     return passed_days;
 }
-/*Eingabe des Datums*/
+/*Die Funktion liest 3 Ganzzahlwerte (Integer) ein, für Tag, Monat und Jahr.*/
 struct date input_date()
 {
     struct date datum;
@@ -30,7 +32,8 @@ struct date input_date()
     return datum;
 }
 
-/*Schaltjahreskontrolle, Jahre vor 1582 sind ungültig*/
+/*Die Funktion überprüft, ob ein gegebenes Jahr nach den Regeln des gregorianischen Kalender ein Schaltjahr
+ist. Bei Jahreszahlen vor dem Jahr 1582 wird ein Fehler zurückgegeben.*/
 int is_leapyear(int year)
 {
     int is_leapyear = 0;
@@ -63,7 +66,8 @@ int is_leapyear(int year)
 
     return is_leapyear;
 }
-/*Berechnung der Tage im Monat */
+/*Die Funktion bestimmt für einen gegebenen Monat eines gegebenen Jahres, wie viele Tage der Monat hat. Der
+Wert des Monats muss zwischen 1 und 12 liegen. Schaltjahre werden berücksichtigt.*/
 int get_days_for_month(int month, int year)
 {
     int tage_pro_monat[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
@@ -83,7 +87,8 @@ int get_days_for_month(int month, int year)
     }
     return days;
 }
-/*Kontrolle ob das eingegebene Datum exisitert*/
+/*Die Funktion überprüft, ob ein eingegebenes Datum gültig ist. Daten vor dem 1.1.1582 sind ungültig, genauso
+wie alle Daten nach dem 31.12.2400.*/
 int exists_date(struct date datum)
 {
     int exists = 0;
